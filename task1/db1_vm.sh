@@ -31,14 +31,13 @@ interact
 _EOF
 sudo yum install expect -y
 sudo chmod 777 ./my.expect
-sleep 5s
 sudo grep 'temporary password' /var/log/mysqld.log | sed 's|.*: ||' >./1.txt
 tmp_pass=$(cat 1.txt)
-echo "$tmp_pass"
 ./my.expect $tmp_pass
+sleep 5s
 wget https://dtapi.if.ua/~yurkovskiy/dtapi_full.sql
 mysql -u root --password=RootPWD1@ dtapi2 < ./dtapi_full.sql
+sudo systemctl restart mysqld
 sudo chmod 666 /etc/my.cnf
 sudo echo "bind-address=192.168.33.100" >>/etc/my.cnf
 sudo chmod 644 /etc/my.cnf
-sudo systemctl restart mysqld
