@@ -13,7 +13,26 @@ sudo yum-config-manager --enable remi-php72
 
 sudo yum install httpd -y
 sudo yum install git -y
-git clone https://github.com/yurkovskiy/dtapi.git
+git clone https://github.com/avvppro/IF-108.git
+mkdir ./IF-108/task1/dt-api/application/logs ./IF-108/task1/dt-api/application/cache
+chmod 766 ./IF-108/task1/dt-api/application/logs
+chmod 766 ./IF-108/task1/dt-api/application/cache
+sudo mv IF-108/task1/dt-api /var/www/
 
+
+sudo mkdir /etc/httpd/sites-available /etc/httpd/sites-enabled
+sudo echo "IncludeOptional sites-enabled/*.conf" >> /etc/httpd/conf/httpd.conf
+mcedit /etc/httpd/sites-available/dt-api.com.conf
+
+<VirtualHost *:80>
+    #    ServerName www.example.com
+    #    ServerAlias example.com
+    DocumentRoot /var/www/dt-api
+    ErrorLog /var/log/httpd/dt-api/error.log
+    CustomLog /var/log/httpd/dt-api/requests.log combined
+</VirtualHost>
+
+sudo mkdir /var/log/httpd/dt-api
+sudo ln -s /etc/httpd/sites-available/dt-api.com.conf /etc/httpd/sites-enabled/dt-api.com.conf
 
 #mysql -u username --password=passwordQ1@ -h 192.168.33.100
