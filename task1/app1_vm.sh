@@ -2,6 +2,7 @@
 sudo yum update -y
 sudo yum install mc -y
 sudo setenforce 0
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 sudo yum install epel-release -y
 sudo rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 sudo rpm -Uvh http://repo.mysql.com/mysql-community-release-el7-7.noarch.rpm
