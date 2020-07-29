@@ -5,7 +5,6 @@ wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
 sudo yum localinstall mysql57-community-release-el7-11.noarch.rpm -y
 sudo yum-config-manager --enable mysql57-community
 sudo yum install mysql-community-server -y
-sudo setenforce 0
 sudo service mysqld start
 cat <<_EOF >./my.expect
 #!/usr/bin/expect -f
@@ -14,25 +13,38 @@ spawn mysql -u root -p
 expect "Enter password:"
 send "[lindex \$argv 0]
 "
-expect "mysql>"
-send "
-"
+sleep 1
 expect "mysql>"
 send "ALTER USER 'root'@'localhost' IDENTIFIED BY 'RootPWD1@';
-CREATE DATABASE dtapi2;
-CREATE USER 'username'@'%' IDENTIFIED BY 'passwordQ1@';
-GRANT ALL PRIVILEGES ON dtapi2.* TO 'username'@'%';
-FLUSH PRIVILEGES;
-exit
 "
-interact
+sleep 1
+expect "mysql>"
+send "CREATE DATABASE dtapi2;
+"
+sleep 1
+expect "mysql>"
+send "CREATE USER 'username'@'%' IDENTIFIED BY 'passwordQ1@';
+"
+sleep 1
+expect "mysql>"
+send "GRANT ALL PRIVILEGES ON dtapi2.* TO 'username'@'%';
+"
+sleep 1
+expect "mysql>"
+send "FLUSH PRIVILEGES;
+"
+sleep 1
+expect "mysql>"
+send "exit
+"
 _EOF
 sudo yum install expect -y
 sudo chmod 777 ./my.expect
 sudo grep 'temporary password' /var/log/mysqld.log | sed 's|.*: ||' >./1.txt
 tmp_pass=$(cat 1.txt)
-./my.expect $tmp_pass
-sleep 5s
+sudo echo "$tmp_pass"
+sudo ./my.expect $tmp_pass
+rm ./my.expect
 wget https://dtapi.if.ua/~yurkovskiy/dtapi_full.sql
 mysql -u root --password=RootPWD1@ dtapi2 < ./dtapi_full.sql
 sudo systemctl restart mysqld
