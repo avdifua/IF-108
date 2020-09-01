@@ -39,6 +39,7 @@ FROM centos:7
 
 WORKDIR /home
 
+COPY ./httpd /home
 COPY --from=builder /home /home
 
 ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]
