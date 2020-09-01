@@ -1,4 +1,4 @@
-FROM centos:7 as builder
+FROM centos:7
 
 WORKDIR /home
 
@@ -33,13 +33,5 @@ RUN yum update -y \
     && chown -R apache:apache -R /var/www/dtester/ \
     && chmod 766 -R /var/www/dtester/ \
     && rm -rf /var/lib/apt/lists/*
-
-
-FROM centos:7
-
-WORKDIR /home
-
-COPY ./httpd /home
-COPY --from=builder /home /home
 
 ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]
