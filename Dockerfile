@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:7 as builder
 
 WORKDIR /home
 
@@ -32,7 +32,13 @@ RUN yum update -y \
     && sed -i -e "s/'password'   => 'passwordQ1@'/'password'   => '6f+w4PXyboSHaI='/g" /var/www/dtester/application/config/database.php \
     && chown -R apache:apache -R /var/www/dtester/ \
     && chmod 766 -R /var/www/dtester/ \
-    && rm -rf /var/lib/apt/lists/* 
+    && rm -rf /var/lib/apt/lists/*
 
+
+FROM centos:7
+
+WORKDIR /home
+
+COPY --from=builder /home /home
 
 ENTRYPOINT ["/usr/sbin/httpd", "-D", "FOREGROUND"]
