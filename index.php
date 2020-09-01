@@ -17,8 +17,8 @@ $modules = 'modules';
 
 /**
  * The directory in which the Kohana resources are located. The system
- * directory must contain the classes/kohana.php file.
- *
+ * directory must contain the classes/kohana.php file. sdfsd
+ *fsdf 
  * @link http://kohanaframework.org/guide/about.install#system
  */
 $system = 'system';
