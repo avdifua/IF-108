@@ -27,7 +27,7 @@ RUN yum update -y \
     && sed -i -e "s/'database'   => 'dtapi2'/'database'   => 'dtesterav'/g" /var/www/dtester/application/config/database.php \
     && sed -i -e "s/'username'   => 'dtapi'/'username'   => 'userdt'/g" /var/www/dtester/application/config/database.php \
     && sed -i -e "s/'password'   => 'dtapi'/'password'   => '6f+w4PXyboSHaI='/g" /var/www/dtester/application/config/database.php \
-    && sed -i -e "s/'dsn'        => 'mysql:host=192.168.33.100;dbname=dtapi2;charset=utf8'/'dsn'        => 'mysql:host=dtester_mysql;dbname=dtesterav;charset=utf8'/g" /var/www/dtester/application/config/database.php \
+    && sed -i -e "s/'dsn'        => 'mysql:host=192.168.33.100;dbname=dtapi2;charset=utf8'/'dsn'        => 'mysql:host=dtester-mysql;dbname=dtesterav;charset=utf8'/g" /var/www/dtester/application/config/database.php \
     && sed -i -e "s/'username'   => 'username'/'username'   => 'userdt'/g" /var/www/dtester/application/config/database.php \
     && sed -i -e "s/'password'   => 'passwordQ1@'/'password'   => '6f+w4PXyboSHaI='/g" /var/www/dtester/application/config/database.php \
     && chown -R apache:apache -R /var/www/dtester/ \
