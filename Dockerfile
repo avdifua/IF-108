@@ -17,7 +17,7 @@ RUN yum update -y \
     && mkdir IF-108/application/logs IF-108/application/cache \
 	&& mkdir -p /var/www/dtester/dt-api \
     && echo "/var/www/dtester/dt-api" | xargs -n 1 cp -r IF-108/* \
-	&& cp /home/IF-108/.htaccess /var/www/dtester/ \
+	&& cp /home/IF-108/.htaccess /var/www/dtester/dt-api \
 	&& mkdir /etc/httpd/sites-available /etc/httpd/sites-enabled /var/log/httpd/dtester \
     && cp /home/dtester.conf /etc/httpd/sites-available/ \
 	&& echo "IncludeOptional sites-enabled/*.conf" >> /etc/httpd/conf/httpd.conf \
