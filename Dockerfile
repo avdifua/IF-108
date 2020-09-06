@@ -15,8 +15,8 @@ RUN yum update -y \
     && systemctl enable httpd \
     && git clone https://github.com/protos-kr/IF-108.git \
     && mkdir IF-108/application/logs IF-108/application/cache \
-	&& mkdir /var/www/dtester \
-    && echo "/var/www/dtester/" | xargs -n 1 cp -r IF-108/* \
+	&& mkdir -p /var/www/dtester/dt-api \
+    && echo "/var/www/dtester/dt-api" | xargs -n 1 cp -r IF-108/* \
 	&& cp /home/IF-108/.htaccess /var/www/dtester/ \
 	&& mkdir /etc/httpd/sites-available /etc/httpd/sites-enabled /var/log/httpd/dtester \
     && cp /home/dtester.conf /etc/httpd/sites-available/ \
