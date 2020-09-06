@@ -22,14 +22,14 @@ RUN yum update -y \
     && cp /home/dtester.conf /etc/httpd/sites-available/ \
 	&& echo "IncludeOptional sites-enabled/*.conf" >> /etc/httpd/conf/httpd.conf \
     && ln -s /etc/httpd/sites-available/dtester.conf /etc/httpd/sites-enabled/dtester.conf \
-    && sed -i -e "s/'type'       => 'MySQL'/'type'       => 'PDO'/g" /var/www/dtester/application/config/database.php \
-    && sed -i -e "s/'hostname'   => 'localhost'/'hostname'   => 'db'/g" /var/www/dtester/application/config/database.php \
-    && sed -i -e "s/'database'   => 'dtapi2'/'database'   => 'dtesterav'/g" /var/www/dtester/application/config/database.php \
-    && sed -i -e "s/'username'   => 'dtapi'/'username'   => 'userdt'/g" /var/www/dtester/application/config/database.php \
-    && sed -i -e "s/'password'   => 'dtapi'/'password'   => '6f+w4PXyboSHaI='/g" /var/www/dtester/application/config/database.php \
-    && sed -i -e "s/'dsn'        => 'mysql:host=192.168.33.100;dbname=dtapi2;charset=utf8'/'dsn'        => 'mysql:host=dtester-mysql;dbname=dtesterav;charset=utf8'/g" /var/www/dtester/application/config/database.php \
-    && sed -i -e "s/'username'   => 'username'/'username'   => 'userdt'/g" /var/www/dtester/application/config/database.php \
-    && sed -i -e "s/'password'   => 'passwordQ1@'/'password'   => '6f+w4PXyboSHaI='/g" /var/www/dtester/application/config/database.php \
+    && sed -i -e "s/'type'       => 'MySQL'/'type'       => 'PDO'/g" /var/www/dtester/dt-api/application/config/database.php \
+    && sed -i -e "s/'hostname'   => 'localhost'/'hostname'   => 'db'/g" /var/www/dtester/dt-api/application/config/database.php \
+    && sed -i -e "s/'database'   => 'dtapi2'/'database'   => 'dtesterav'/g" /var/www/dtester/dt-api/application/config/database.php \
+    && sed -i -e "s/'username'   => 'dtapi'/'username'   => 'userdt'/g" /var/www/dtester/application/dt-api/config/database.php \
+    && sed -i -e "s/'password'   => 'dtapi'/'password'   => '6f+w4PXyboSHaI='/g" /var/www/dtester/application/dt-api/config/database.php \
+    && sed -i -e "s/'dsn'        => 'mysql:host=192.168.33.100;dbname=dtapi2;charset=utf8'/'dsn'        => 'mysql:host=dtester-mysql;dbname=dtesterav;charset=utf8'/g" /var/www/dtester/dt-api/application/config/database.php \
+    && sed -i -e "s/'username'   => 'username'/'username'   => 'userdt'/g" /var/www/dtester/dt-api/application/config/database.php \
+    && sed -i -e "s/'password'   => 'passwordQ1@'/'password'   => '6f+w4PXyboSHaI='/g" /var/www/dtester/dt-api/application/config/database.php \
     && chown -R apache:apache -R /var/www/dtester/ \
     && chmod 766 -R /var/www/dtester/ \
     && rm -rf /var/lib/apt/lists/*
